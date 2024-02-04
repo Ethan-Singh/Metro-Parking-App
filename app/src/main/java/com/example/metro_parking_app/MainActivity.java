@@ -28,14 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
         textViewResult = findViewById(R.id.textViewResult);
 
-        try (InputStream inputStream = getAssets().open("key.txt");
-             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-
-            apiKey = br.readLine();
-            System.out.println("API Key read from file: " + apiKey);
-
+        try {
+            apiKey = readApiKey();
         } catch (IOException e) {
-            System.err.println("IOException: " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
         //uses an executor to complete an asynchronous network call
@@ -47,6 +43,23 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(() -> textViewResult.setText(result));
         });
 
+
+    }
+
+    private String readApiKey() throws IOException {
+        InputStream myKey = getAssets().open("myKey.txt");
+        if(myKey != null){
+            BufferedReader br = new BufferedReader(new InputStreamReader(myKey));
+            return br.readLine();
+        }
+        InputStream key = getAssets().open("key.txt");
+        if(key != null){
+            BufferedReader br = new BufferedReader(new InputStreamReader(key));
+            return br.readLine();
+        }
+
+        System.err.println("ERROR. NO_API_KEY_FOUND. Please input your api key in the app/src/main/assets/key.txt file");
+        return "NO_API_KEY";
 
     }
 

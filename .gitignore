@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/src/main/assets/key.txt
+/app/src/main/assets/myKey.txt
