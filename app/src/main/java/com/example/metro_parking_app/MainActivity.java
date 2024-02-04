@@ -1,4 +1,4 @@
-package com.example.myapplicationmark2;
+package com.example.metro_parking_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,17 +6,20 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
+
     private TextView textViewResult;
 
-    //need to make this more secure - relative path maybe, use .gitignore for a local .txtfile?
-    private final String apiKey = "apikey [your apiKey]";
+    private String apiKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textViewResult = findViewById(R.id.textViewResult);
+
+        try (InputStream inputStream = getAssets().open("key.txt");
+             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+
+            apiKey = br.readLine();
+            System.out.println("API Key read from file: " + apiKey);
+
+        } catch (IOException e) {
+            System.err.println("IOException: " + e.getMessage());
+        }
 
         //uses an executor to complete an asynchronous network call
         Executor executor = Executors.newSingleThreadExecutor();
@@ -33,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
             //return 'result's on main thread
             runOnUiThread(() -> textViewResult.setText(result));
         });
+
+
     }
 
     private String ApiRequest() {
@@ -67,4 +82,5 @@ public class MainActivity extends AppCompatActivity {
         java.util.Scanner s = new java.util.Scanner(inputStream).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.myapplicationmark2;
+package com.example.metro_parking_app;
 
 import org.junit.Test;
 
