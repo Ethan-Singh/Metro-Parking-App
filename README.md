@@ -17,7 +17,7 @@
 <br>
 
 # Things I'd like to get done
-- [ ] Make a new class for the ApiRequest function 
-- [ ] Make new classes for the results from APIRequest (read the documentation for the data structure)
+- [X] Make a new class for the ~~ApiRequest~~ (name changed to CarParkAPI) function 
+- [X] Make new classes for the results from CarParkAPI (read the documentation for the data structure)
 - [ ] Make a better GUI
 - [ ] Incorporate OKHttp/Retrofit for dynamic API requests 
