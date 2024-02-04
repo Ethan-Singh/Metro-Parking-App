@@ -11,8 +11,9 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textViewResult;
-
+    private String result;
     private OpenData openData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             //network call
-            String result = openData.CarParkAPI();
+            result = openData.CarParkAPI();
             //return 'result's on main thread
             runOnUiThread(() -> textViewResult.setText(result));
         });

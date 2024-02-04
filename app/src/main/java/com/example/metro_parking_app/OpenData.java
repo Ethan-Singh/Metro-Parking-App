@@ -1,6 +1,11 @@
 package com.example.metro_parking_app;
 
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -15,7 +20,7 @@ public class OpenData {
     private String apiKey;
     private final AppCompatActivity activity;
 
-    public OpenData(AppCompatActivity activity){
+    public OpenData(AppCompatActivity activity) {
         this.activity = activity;
     }
 
@@ -38,9 +43,24 @@ public class OpenData {
         }
     }
 
+    private String convertInputStreamToString(InputStream inputStream) {
+        java.util.Scanner s = new java.util.Scanner(inputStream).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
+    private Facility parseFacility(String json) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            return objectMapper.readValue(json, Facility.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public String CarParkAPI() {
         try {
-            //initialise the URL
+            // Initialize the URL
             URL url = new URL("https://api.transport.nsw.gov.au/v1/carpark?facility=1");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
@@ -51,7 +71,14 @@ public class OpenData {
                 int response = urlConnection.getResponseCode();
                 if (response == HttpURLConnection.HTTP_OK) {
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                    return convertInputStreamToString(in);
+                    Facility facility = parseFacility(convertInputStreamToString(in));
+
+                    if (facility != null) {
+                        System.out.println(facility.getSpots());
+                        return "It workssss!!!";
+                    } else {
+                        return "Facility object is null";
+                    }
                 } else {
                     InputStream errorStream = new BufferedInputStream(urlConnection.getErrorStream());
                     return "Error response: " + convertInputStreamToString(errorStream);
@@ -60,14 +87,10 @@ public class OpenData {
             } finally {
                 urlConnection.disconnect();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error: " + e.getMessage();
+        } catch (IOException e) {
+            Log.e("YourClass", "Error reading from the network", e);
+            return "Error reading from the network: " + e.getMessage();
         }
     }
 
-    private String convertInputStreamToString(InputStream inputStream) {
-        java.util.Scanner s = new java.util.Scanner(inputStream).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
 }
