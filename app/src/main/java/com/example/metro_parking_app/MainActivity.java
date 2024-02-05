@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textViewResult;
     private String result;
-    private OpenData openData;
 
 
     @Override
@@ -21,14 +20,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textViewResult = findViewById(R.id.textViewResult);
-        openData = new OpenData(this);
-        openData.readApiKey();
+
+        ApiKey apiKey = new ApiKey();
+        ApiRequest apiRequest = new ApiRequest(apiKey.readApiKey(this));
 
         //uses an executor to complete an asynchronous network call
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             //network call
-            result = openData.CarParkAPI();
+            result = apiRequest.CarParkAPI();
             //return 'result's on main thread
             runOnUiThread(() -> textViewResult.setText(result));
         });

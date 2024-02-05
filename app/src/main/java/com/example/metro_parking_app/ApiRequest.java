@@ -2,45 +2,21 @@ package com.example.metro_parking_app;
 
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class OpenData {
+public class ApiRequest {
 
-    private String apiKey;
-    private final AppCompatActivity activity;
+    private final String apiKey;
 
-    public OpenData(AppCompatActivity activity) {
-        this.activity = activity;
-    }
-
-    public void readApiKey() {
-        try (InputStream myKey = activity.getAssets().open("myKey.txt");
-             InputStream key = activity.getAssets().open("key.txt")) {
-
-            InputStream selectedStream = (myKey != null) ? myKey : key;
-
-            if (selectedStream != null) {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(selectedStream))) {
-                    apiKey = br.readLine();
-                    return;
-                }
-            }
-
-            System.err.println("ERROR. NO_API_KEY_FOUND. Please input your API key in the app/src/main/assets/key.txt file");
-        } catch (IOException e) {
-            e.printStackTrace(); // You might want to log the exception or handle it appropriately.
-        }
+    public ApiRequest(String apiKey) {
+        this.apiKey = apiKey;
     }
 
     private String convertInputStreamToString(InputStream inputStream) {
