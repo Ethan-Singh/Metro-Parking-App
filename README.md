@@ -19,6 +19,6 @@
 # Things I'd like to get done
 - [X] Make a new class for the ~~ApiRequest~~ (name changed to CarParkAPI) function 
 - [X] Make new classes for the results from CarParkAPI (read the [documentation]([url](https://opendata.transport.nsw.gov.au/dataset/car-park-api)) for the data structure)
-- [X] Make a better GUI
-> Okay the GUI isn't exactly the "best", but I want to move onto this
+- [X] Make a better GUI <br>
+_(Okay the GUI isn't exactly the "best", but I want to move onto this)_
 - [ ] Incorporate OKHttp/Retrofit for dynamic API requests (need to make sure <5 requests are sent a second)
