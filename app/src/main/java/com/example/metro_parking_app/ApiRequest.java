@@ -34,7 +34,7 @@ public class ApiRequest {
         }
     }
 
-    public String CarParkAPI() {
+    public Facility CarParkAPI() {
         try {
             // Initialize the URL
             URL url = new URL("https://api.transport.nsw.gov.au/v1/carpark?facility=1");
@@ -48,16 +48,15 @@ public class ApiRequest {
                 if (response == HttpURLConnection.HTTP_OK) {
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     Facility facility = parseFacility(convertInputStreamToString(in));
-
                     if (facility != null) {
-                        System.out.println(facility.getSpots());
-                        return "It workssss!!!";
+                        System.out.println("Facility is NOT null");
                     } else {
-                        return "Facility object is null";
+                        System.out.println("Facility IS null");
                     }
+                    return facility;
                 } else {
                     InputStream errorStream = new BufferedInputStream(urlConnection.getErrorStream());
-                    return "Error response: " + convertInputStreamToString(errorStream);
+                    System.err.println("Error response: " + convertInputStreamToString(errorStream));                    return null;
                 }
 
             } finally {
@@ -65,7 +64,8 @@ public class ApiRequest {
             }
         } catch (IOException e) {
             Log.e("YourClass", "Error reading from the network", e);
-            return "Error reading from the network: " + e.getMessage();
+            e.printStackTrace();
+            return null;
         }
     }
 
