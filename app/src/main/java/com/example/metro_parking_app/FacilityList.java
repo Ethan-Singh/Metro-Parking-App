@@ -15,7 +15,6 @@ public class FacilityList {
     }
 
     public List<Facility> getList() {
-        return new ArrayList<>(facilityList);
+        return facilityList;
     }
-
 }

@@ -35,10 +35,10 @@ public class ApiRequest {
         }
     }
 
-    public Facility CarParkAPI() {
+    public Facility CarParkAPI(String facilityId) {
         try {
             // Initialize the URL
-            URL url = new URL("https://api.transport.nsw.gov.au/v1/carpark?facility=1");
+            URL url = new URL("https://api.transport.nsw.gov.au/v1/carpark?facility=" + facilityId);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 urlConnection.setRequestMethod("GET");
