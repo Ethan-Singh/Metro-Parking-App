@@ -7,7 +7,7 @@
  
 # Issues
 - ~~I am currently getting a 501 response from the server (too many requests), however, I've done some testing using https://jsonplaceholder.typicode.com/ and I should only be requesting once on startup. I am in the process of adding a refresh function to confirm.~~
-> A: If you call the api directly /carpark/ without specifying which one, it calls all of them, which translates into >5 requests a second as there are >5 metro car parks.
+> A: If you call the api directly ".../carpark/" without specifying which one, it calls all of them, which translates into >5 requests a second as there are >5 metro car parks.
 
 <br>
 
@@ -18,6 +18,7 @@
 
 # Things I'd like to get done
 - [X] Make a new class for the ~~ApiRequest~~ (name changed to CarParkAPI) function 
-- [X] Make new classes for the results from CarParkAPI (read the documentation for the data structure)
-- [ ] Make a better GUI
-- [ ] Incorporate OKHttp/Retrofit for dynamic API requests 
+- [X] Make new classes for the results from CarParkAPI (read the [documentation]([url](https://opendata.transport.nsw.gov.au/dataset/car-park-api)) for the data structure)
+- [X] Make a better GUI <br>
+_(Okay the 'GUI' isn't exactly the best, but I want to move onto this)_
+- [ ] Incorporate OKHttp/Retrofit for dynamic API requests (need to make sure <5 requests are sent a second)
