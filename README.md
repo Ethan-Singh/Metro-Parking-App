@@ -22,3 +22,4 @@
 - [X] Make a better GUI <br>
 _(Okay the 'GUI' isn't exactly the best, but I want to move onto this)_
 - [ ] Incorporate OKHttp/Retrofit for dynamic API requests (need to make sure <5 requests are sent a second)
+- [ ] Use notifyDataSetHasChanged() to make the recycler view adapt to the calls (instead of having to wait for all the calls to be done)
