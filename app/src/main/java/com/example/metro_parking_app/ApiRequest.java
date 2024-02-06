@@ -13,6 +13,7 @@ import java.net.URL;
 
 public class ApiRequest {
 
+    //better to be a private variable -> can't be printed from the Main (not a param)
     private final String apiKey;
 
     public ApiRequest(String apiKey) {

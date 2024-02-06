@@ -14,6 +14,8 @@ public class Occupancy {
     @JsonProperty("transients")
     private String transients;
 
+    private String empty;
+
     public String getLoop() {
         return loop;
     }
@@ -53,5 +55,10 @@ public class Occupancy {
     public void setTransients(String transients) {
         this.transients = transients;
     }
+
+    public String getEmpty() {
+        return empty;
+    }
+
 }
 

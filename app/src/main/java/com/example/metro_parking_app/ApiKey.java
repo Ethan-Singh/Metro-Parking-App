@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class ApiKey {
-    public String readApiKey(AppCompatActivity activity) {
+    public static String readApiKey(AppCompatActivity activity) {
         try (InputStream myKey = activity.getAssets().open("myKey.txt");
              InputStream key = activity.getAssets().open("key.txt")) {
 
@@ -20,7 +20,7 @@ public class ApiKey {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace(); // You might want to log the exception or handle it appropriately.
+            e.printStackTrace();
         }
 
         System.err.println("ERROR. NO_API_KEY_FOUND. Please input your API key in the app/src/main/assets/key.txt file");
