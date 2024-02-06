@@ -4,8 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public class Occupancy {
+
+    @JsonProperty("loop")
     private String loop;
+
+    @JsonProperty("total")
     private String total;
+
+    @JsonProperty("monthlies")
     private String monthlies;
 
     @JsonProperty("open_gate")
@@ -14,6 +20,7 @@ public class Occupancy {
     @JsonProperty("transients")
     private String transients;
 
+    @JsonProperty("empty")
     private String empty;
 
     public String getLoop() {

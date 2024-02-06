@@ -1,29 +1,45 @@
 package com.example.metro_parking_app;
 
 import java.util.List;
+import java.util.Locale;
 
 public class FacilityFormatter {
-    public static String format(Facility facility){
+    public static String format(Facility facility) {
         StringBuilder formattedString = new StringBuilder();
         String facilityName = facility.getFacilityName();
         String totalSpots = facility.getSpots();
         String occupancy = facility.getOccupancy().getTotal();
-        int availableSpots = Integer.parseInt(totalSpots) - Integer.parseInt(occupancy);
 
-        formattedString.append("Facility Name: ").append(facilityName)
-                .append("\nAvaialable Spots: ").append(availableSpots)
-                .append("\nTotal Spots: ").append(totalSpots)
-                .append("\n\nParking Bays:");
+        // check the strings are not null
+        int availableSpots = 0;
+        if (totalSpots != null && occupancy != null) {
+            try {
+                availableSpots = Integer.parseInt(totalSpots) - Integer.parseInt(occupancy);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        formattedString.append(String.format(Locale.getDefault(), "%s\nAvailable Spots: %d\nTotal Spots: %s\n\n",
+                facilityName, availableSpots, totalSpots));
 
         List<Zone> zones = facility.getZones();
         for (Zone zone : zones) {
             totalSpots = zone.getSpots();
             occupancy = zone.getOccupancy().getTotal();
-            availableSpots = Integer.parseInt(totalSpots) - Integer.parseInt(occupancy);
 
-            formattedString.append("\n").append(zone.getZoneName())
-                    .append("\n  Available Spots: ").append(availableSpots)
-                    .append("\n  Total Spots: ").append(totalSpots).append("\n");
+            // check the strings are not null
+            availableSpots = 0;
+            if (totalSpots != null && occupancy != null) {
+                try {
+                    availableSpots = Integer.parseInt(totalSpots) - Integer.parseInt(occupancy);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            formattedString.append(String.format(Locale.getDefault(), "\t%s\n\tAvailable Spots: %d\n\tTotal Spots: %s\n\n",
+                    zone.getZoneName(), availableSpots, totalSpots));
         }
         return formattedString.toString();
     }
