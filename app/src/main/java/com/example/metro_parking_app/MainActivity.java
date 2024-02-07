@@ -2,7 +2,6 @@ package com.example.metro_parking_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         FacilityList facilityList = new FacilityList();
         AtomicInteger calls = new AtomicInteger(0);
 
-        RecyclerView recyclerViewFacilities = findViewById(R.id.recyclerViewFacilities);
+//        RecyclerView recyclerViewFacilities = findViewById(R.id.recyclerViewFacilities);
         RecyclerView recyclerViewLine = findViewById(R.id.recyclerViewLine);
 
 
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         executor.execute(() -> {
             ApiRequest apiRequest = new ApiRequest(ApiKey.readApiKey(this));
-            for (String currFacilityId: facilityIds) {
+            for (String currFacilityId : facilityIds) {
                 // increment each call
                 int totalCalls = calls.incrementAndGet();
                 Facility currFacility = apiRequest.CarParkAPI(currFacilityId);
@@ -48,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
                         // updates UI on the main thread
                         runOnUiThread(() -> {
                             try {
-                                FacilityAdapter facilityAdapter = new FacilityAdapter(facilityList.getFacilityList());
-                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-                                recyclerViewFacilities.setLayoutManager(layoutManager);
-                                recyclerViewFacilities.setAdapter(facilityAdapter);
+//                               FacilityAdapter facilityAdapter = new FacilityAdapter(facilityList.getFacilityList());
+//                               RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+//                               recyclerViewFacilities.setLayoutManager(layoutManager);
+//                               recyclerViewFacilities.setAdapter(facilityAdapter);
 
-                                LineAdapter lineAdapter = new LineAdapter();
+                                LineAdapter lineAdapter = new LineAdapter(LineList.getLineList(), LineList.getLineColour());
                                 RecyclerView.LayoutManager layoutManagerTwo = new GridLayoutManager(this, 2);
                                 recyclerViewLine.setLayoutManager(layoutManagerTwo);
                                 recyclerViewLine.setAdapter(lineAdapter);
