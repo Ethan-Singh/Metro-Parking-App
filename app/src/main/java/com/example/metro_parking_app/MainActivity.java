@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> allFacilityIds = new FacilityMap().getAllFacilityIds();
+        List<String> allFacilityIds = new FacilityMap().getFacilityIds("M");
         FacilityList facilityList = new FacilityList();
         AtomicInteger completedCalls = new AtomicInteger(0);
 

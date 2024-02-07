@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class FacilityMap {
     private final Map<String, List<String>> facilityMap;
@@ -41,11 +42,7 @@ public class FacilityMap {
         facilityMap.put("B-Line", Arrays.asList("10", "11", "12", "13", "490", "489"));
     }
 
-    public List<String> getAllFacilityIds() {
-        List<String> allFacilityIds = new ArrayList<>();
-        for (List<String> facilityIds : facilityMap.values()) {
-            allFacilityIds.addAll(facilityIds);
-        }
-        return allFacilityIds;
+    public List<String> getFacilityIds(String line) {
+        return new ArrayList<>(Objects.requireNonNull(facilityMap.get(line)));
     }
 }
