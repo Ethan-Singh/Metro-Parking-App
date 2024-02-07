@@ -1,6 +1,7 @@
 package com.example.metro_parking_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         AtomicInteger calls = new AtomicInteger(0);
 
         RecyclerView recyclerViewFacilities = findViewById(R.id.recyclerViewFacilities);
+        RecyclerView recyclerViewLine = findViewById(R.id.recyclerViewLine);
+
 
         //uses an executor to complete an asynchronous network call
         Executor executor = Executors.newSingleThreadExecutor();
@@ -49,7 +52,11 @@ public class MainActivity extends AppCompatActivity {
                                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
                                 recyclerViewFacilities.setLayoutManager(layoutManager);
                                 recyclerViewFacilities.setAdapter(facilityAdapter);
-                                System.out.println();
+
+                                LineAdapter lineAdapter = new LineAdapter();
+                                RecyclerView.LayoutManager layoutManagerTwo = new GridLayoutManager(this, 2);
+                                recyclerViewLine.setLayoutManager(layoutManagerTwo);
+                                recyclerViewLine.setAdapter(lineAdapter);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
