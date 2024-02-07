@@ -51,6 +51,4 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
     public int getItemCount() {
         return facilityList.size();
     }
-
-
 }

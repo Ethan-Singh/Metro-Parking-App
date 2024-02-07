@@ -20,11 +20,6 @@ public class ApiRequest {
         this.apiKey = apiKey;
     }
 
-    private String convertInputStreamToString(InputStream inputStream) {
-        java.util.Scanner s = new java.util.Scanner(inputStream).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
     private Facility parseFacility(String json) {
         try {
             ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -33,6 +28,11 @@ public class ApiRequest {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private String convertInputStreamToString(InputStream inputStream) {
+        java.util.Scanner s = new java.util.Scanner(inputStream).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
     }
 
     public Facility CarParkAPI(String facilityId) {
@@ -57,7 +57,8 @@ public class ApiRequest {
                     return facility;
                 } else {
                     InputStream errorStream = new BufferedInputStream(urlConnection.getErrorStream());
-                    System.err.println("Error response: " + convertInputStreamToString(errorStream));                    return null;
+                    System.err.println("Error response: " + convertInputStreamToString(errorStream));
+                    return null;
                 }
 
             } finally {

@@ -1,46 +1,27 @@
 package com.example.metro_parking_app;
 
-import java.util.List;
 import java.util.Locale;
 
 public class FacilityFormatter {
     public static String format(Facility facility) {
         StringBuilder formattedString = new StringBuilder();
         String facilityName = facility.getFacilityName();
-        String totalSpots = facility.getSpots();
-        String occupancy = facility.getOccupancy().getTotal();
+        String facilitySpots = facility.getSpots();
+        String facilityOccupancy = facility.getOccupancy().getTotal();
 
+        int facilityAvailableSpots = 0;
         // check the strings are not null
-        int availableSpots = 0;
-        if (totalSpots != null && occupancy != null) {
+        if (facilitySpots != null && facilityOccupancy != null) {
             try {
-                availableSpots = Integer.parseInt(totalSpots) - Integer.parseInt(occupancy);
+                facilityAvailableSpots = Integer.parseInt(facilitySpots) - Integer.parseInt(facilityOccupancy);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
 
         formattedString.append(String.format(Locale.getDefault(), "%s\nAvailable Spots: %d\nTotal Spots: %s\n\n",
-                facilityName, availableSpots, totalSpots));
+                facilityName, facilityAvailableSpots, facilitySpots));
 
-        List<Zone> zones = facility.getZones();
-        for (Zone zone : zones) {
-            totalSpots = zone.getSpots();
-            occupancy = zone.getOccupancy().getTotal();
-
-            // check the strings are not null
-            availableSpots = 0;
-            if (totalSpots != null && occupancy != null) {
-                try {
-                    availableSpots = Integer.parseInt(totalSpots) - Integer.parseInt(occupancy);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            formattedString.append(String.format(Locale.getDefault(), "\t%s\n\tAvailable Spots: %d\n\tTotal Spots: %s\n\n",
-                    zone.getZoneName(), availableSpots, totalSpots));
-        }
         return formattedString.toString();
     }
 }

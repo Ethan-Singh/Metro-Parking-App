@@ -10,11 +10,12 @@ public class FacilityList {
         facilityList = new ArrayList<>();
     }
 
+    public List<Facility> getList() {
+        return facilityList;
+    }
+
     public void addFacility(Facility facility){
         facilityList.add(facility);
     }
 
-    public List<Facility> getList() {
-        return facilityList;
-    }
 }
