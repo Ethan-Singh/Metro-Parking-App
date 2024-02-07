@@ -3,7 +3,7 @@ package com.example.metro_parking_app;
 import java.util.Locale;
 
 public class FacilityFormatter {
-    public static String format(Facility facility) {
+    public static String facilityFormat(Facility facility) {
         StringBuilder formattedString = new StringBuilder();
         String facilityName = facility.getFacilityName();
         String facilitySpots = facility.getSpots();

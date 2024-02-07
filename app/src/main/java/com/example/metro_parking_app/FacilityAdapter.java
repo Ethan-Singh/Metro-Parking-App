@@ -43,7 +43,7 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Facility facility = facilityList.get(position);
-        String formattedFacilityData = FacilityFormatter.format(facility);
+        String formattedFacilityData = FacilityFormatter.facilityFormat(facility);
         viewHolder.getTextView().setText(formattedFacilityData);
     }
 

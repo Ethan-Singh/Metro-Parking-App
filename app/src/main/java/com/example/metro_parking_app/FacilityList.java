@@ -10,7 +10,7 @@ public class FacilityList {
         facilityList = new ArrayList<>();
     }
 
-    public List<Facility> getList() {
+    public List<Facility> getFacilityList() {
         return facilityList;
     }
 

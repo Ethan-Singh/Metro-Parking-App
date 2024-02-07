@@ -19,9 +19,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> allFacilityIds = new FacilityMap().getFacilityIds("M");
+        FacilityMap facilityMap = new FacilityMap();
+        List<String> facilityIds = facilityMap.getAllFacilityIds();
         FacilityList facilityList = new FacilityList();
-        AtomicInteger completedCalls = new AtomicInteger(0);
+        AtomicInteger calls = new AtomicInteger(0);
 
         RecyclerView recyclerViewFacilities = findViewById(R.id.recyclerViewFacilities);
 
@@ -31,21 +32,24 @@ public class MainActivity extends AppCompatActivity {
 
         executor.execute(() -> {
             ApiRequest apiRequest = new ApiRequest(ApiKey.readApiKey(this));
-            for (String facilityId: allFacilityIds) {
+            for (String currFacilityId: facilityIds) {
                 // increment each call
-                int callCount = completedCalls.incrementAndGet();
-                facilityList.addFacility(apiRequest.CarParkAPI(facilityId));
+                int totalCalls = calls.incrementAndGet();
+                Facility currFacility = apiRequest.CarParkAPI(currFacilityId);
+                facilityList.addFacility(currFacility);
+                currFacility.setLine(facilityMap.getKeyfromValue(currFacilityId));
                 // uses handler for 200 millisecond delay (+10 millisecond buffer)
                 handler.postDelayed(() -> {
                     // if all calls have been completed
-                    if (callCount == allFacilityIds.size()) {
+                    if (totalCalls == facilityIds.size()) {
                         // updates UI on the main thread
                         runOnUiThread(() -> {
                             try {
-                                FacilityAdapter facilityAdapter = new FacilityAdapter(facilityList.getList());
+                                FacilityAdapter facilityAdapter = new FacilityAdapter(facilityList.getFacilityList());
                                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
                                 recyclerViewFacilities.setLayoutManager(layoutManager);
                                 recyclerViewFacilities.setAdapter(facilityAdapter);
+                                System.out.println();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

@@ -35,6 +35,8 @@ public class Facility {
     @JsonProperty("tfnsw_facility_id")
     private String tfnswFacilityID;
 
+    private String line;
+
     public String getTsn() {
         return tsn;
     }
@@ -113,6 +115,14 @@ public class Facility {
 
     public void setTfnswFacilityID(String tfnswFacilityID) {
         this.tfnswFacilityID = tfnswFacilityID;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
     }
 }
 
