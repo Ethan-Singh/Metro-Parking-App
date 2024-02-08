@@ -5,9 +5,12 @@ public class Line {
     private int image;
     private int colour;
 
-    public Line(int image, int colour) {
+    private int id;
+
+    public Line(int image, int colour, int id) {
         this.image = image;
         this.colour = colour;
+        this.id = id;
     }
 
     public int getImage() {
@@ -24,5 +27,13 @@ public class Line {
 
     public void setColour(int colour) {
         this.colour = colour;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
