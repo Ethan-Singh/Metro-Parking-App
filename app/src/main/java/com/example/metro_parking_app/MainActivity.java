@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-//        binding.textMain.setText("Station Parking");
+        binding.mainText.setText("Station Parking");
 
         final ArrayList<Line> lineList = LineData.getLineData();
 

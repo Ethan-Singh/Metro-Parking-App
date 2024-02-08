@@ -36,7 +36,7 @@ public class FacilityDetailsActivity extends AppCompatActivity {
         if (lineList != null) {
 
             FacilityMapData facilityMap = new FacilityMapData();
-            List<String> facilityIdsFromLine = facilityMap.getFacilityIdsfromLine(lineList.getId());
+            List<String> facilityIdsFromLine = facilityMap.getFacilityIdsFromLine(lineList.getId());
             AtomicInteger calls = new AtomicInteger(0);
             ArrayList<Facility> allFacilityApiData = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class FacilityDetailsActivity extends AppCompatActivity {
                 for (String currFacilityID : facilityIdsFromLine) {
                     int totalCalls = calls.incrementAndGet();
                     Facility currFacility = apiRequest.CarParkAPI(currFacilityID);
-                    currFacility.setLine(facilityMap.getLinefromId(currFacilityID));
+                    currFacility.setLine(facilityMap.getLineFromId(currFacilityID));
                     allFacilityApiData.add(currFacility);
                     handler.postDelayed(() -> {
                         if (totalCalls == facilityIdsFromLine.size()) {

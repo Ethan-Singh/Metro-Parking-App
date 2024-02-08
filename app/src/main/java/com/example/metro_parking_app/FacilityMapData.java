@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class FacilityMapData {
 
@@ -25,6 +24,7 @@ public class FacilityMapData {
         facilityMap.put("B-Line", Arrays.asList("10", "11", "12", "13", "490", "489"));
     }
 
+    //for debugging
     public List<String> getAllFacilityIds() {
         List<String> allFacilityIds = new ArrayList<>();
         for (List<String> facilityIds : facilityMap.values()) {
@@ -33,7 +33,7 @@ public class FacilityMapData {
         return allFacilityIds;
     }
 
-    public String getLinefromId (String val){
+    public String getLineFromId(String val){
         for(Map.Entry<String, List<String>> entry: facilityMap.entrySet()){
             if(entry.getValue().contains(val)){
                 return entry.getKey();
@@ -43,8 +43,14 @@ public class FacilityMapData {
         return null;
     }
 
-    public List<String> getFacilityIdsfromLine(String line){
-        return new ArrayList<>(Objects.requireNonNull(facilityMap.get(line)));
+    public List<String> getFacilityIdsFromLine(String line) {
+        List<String> facilityIds = facilityMap.get(line);
+
+        if (facilityIds == null) {
+            throw new IllegalArgumentException("Facility IDs for the given line are null");
+        }
+
+        return new ArrayList<>(facilityIds);
     }
 
 

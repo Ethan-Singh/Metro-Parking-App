@@ -25,7 +25,7 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Facility item = items.get(position);
-        viewHolder.getBinding().facilityText.setText(FacilityFormatter.facilityFormat(item));
+        viewHolder.setText(item);
     }
 
 
@@ -45,6 +45,10 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
 
         final FacilityItemRowBinding getBinding() {
             return binding;
+        }
+
+        final void setText(Facility item) {
+            binding.facilityText.setText(FacilityFormatter.facilityFormat(item));
         }
     }
 
