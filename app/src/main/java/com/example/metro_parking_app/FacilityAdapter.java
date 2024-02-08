@@ -1,52 +1,57 @@
 package com.example.metro_parking_app;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.metro_parking_app.databinding.FacilityItemRowBinding;
+
+import java.util.ArrayList;
 
 public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHolder>{
 
-    private final FacilityList facilityList;
+    private final ArrayList<Facility> items;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
-
-        public ViewHolder(View view) {
-            super(view);
-
-            textView = view.findViewById(R.id.textViewFacilityItem);
-        }
-
-        public TextView getTextView() {
-            return textView;
-        }
+    public FacilityAdapter(ArrayList<Facility> items){
+        this.items = items;
     }
 
-    public FacilityAdapter(FacilityList facilityList){
-        this.facilityList = facilityList;
-    }
-
-    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.facility_item, viewGroup,false);
-        return new ViewHolder(view);
+        return new ViewHolder(FacilityItemRowBinding.inflate(LayoutInflater.from(viewGroup.getContext()), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Facility facility = facilityList.getFacilityList().get(position);
-        String formattedFacilityData = FacilityFormatter.facilityFormat(facility);
-        viewHolder.getTextView().setText(formattedFacilityData);
+        Facility item = items.get(position);
+        viewHolder.getBinding().facilityText.setText(FacilityFormatter.facilityFormat(item));
     }
+
 
     @Override
     public int getItemCount() {
-        return facilityList.getFacilityList().size();
+        return items.size();
     }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        FacilityItemRowBinding binding;
+
+        public ViewHolder(FacilityItemRowBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        final FacilityItemRowBinding getBinding() {
+            return binding;
+        }
+    }
+
+
+
+
+
+
+
 }

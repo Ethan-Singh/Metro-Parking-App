@@ -1,13 +1,15 @@
 package com.example.metro_parking_app;
 
-public class Line {
+import java.io.Serializable;
 
-    private int image;
-    private int colour;
+public class Line implements Serializable {
 
-    private int id;
+    private final int image;
+    private final int colour;
 
-    public Line(int image, int colour, int id) {
+    private final String id;
+
+    public Line(int image, int colour, String id) {
         this.image = image;
         this.colour = colour;
         this.id = id;
@@ -17,23 +19,11 @@ public class Line {
         return image;
     }
 
-    public void setImage(int image) {
-        this.image = image;
-    }
-
     public int getColour() {
         return colour;
     }
 
-    public void setColour(int colour) {
-        this.colour = colour;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

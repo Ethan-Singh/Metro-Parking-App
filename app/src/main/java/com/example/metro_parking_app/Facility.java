@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+
 public class Facility {
     @JsonProperty("tsn")
     private String tsn;
@@ -124,5 +125,6 @@ public class Facility {
     public void setLine(String line) {
         this.line = line;
     }
-}
 
+
+}
