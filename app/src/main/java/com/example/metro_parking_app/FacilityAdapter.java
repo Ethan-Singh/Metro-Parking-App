@@ -8,11 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHolder>{
 
-    private final List<Facility> facilityList;
+    private final FacilityList facilityList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
@@ -28,7 +26,7 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
         }
     }
 
-    public FacilityAdapter(List<Facility> facilityList){
+    public FacilityAdapter(FacilityList facilityList){
         this.facilityList = facilityList;
     }
 
@@ -42,13 +40,13 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Facility facility = facilityList.get(position);
+        Facility facility = facilityList.getFacilityList().get(position);
         String formattedFacilityData = FacilityFormatter.facilityFormat(facility);
         viewHolder.getTextView().setText(formattedFacilityData);
     }
 
     @Override
     public int getItemCount() {
-        return facilityList.size();
+        return facilityList.getFacilityList().size();
     }
 }

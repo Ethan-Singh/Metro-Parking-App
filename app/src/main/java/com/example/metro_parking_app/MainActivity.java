@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -52,7 +53,24 @@ public class MainActivity extends AppCompatActivity {
 //                               recyclerViewFacilities.setLayoutManager(layoutManager);
 //                               recyclerViewFacilities.setAdapter(facilityAdapter);
 
-                                LineAdapter lineAdapter = new LineAdapter(LineList.getLineList(), LineList.getLineColour());
+
+                                LineList lineList = new LineList();
+                                lineList.addLine(new Line (R.drawable.sydney_metro_line, Color.parseColor("#008C94")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t1, Color.parseColor("#f6910f")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t2, Color.parseColor("#0697d1")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t3, Color.parseColor("#f25b18")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t4, Color.parseColor("#1e56a8")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t5, Color.parseColor("#c41090")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t6, Color.parseColor("#4664af")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t7, Color.parseColor("#697c8a")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t8, Color.parseColor("#0a9649")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_t9, Color.parseColor("#d21a2d")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_sco, Color.parseColor("#1e56a8")));
+                                lineList.addLine(new Line (R.drawable.tfnsw_ccn, Color.parseColor("#d01f31")));
+                                lineList.addLine(new Line (R.drawable.sydney_b_line, Color.parseColor("#FFB81C")));
+
+
+                              LineAdapter lineAdapter = new LineAdapter(lineList);
                                 RecyclerView.LayoutManager layoutManagerTwo = new GridLayoutManager(this, 2);
                                 recyclerViewLine.setLayoutManager(layoutManagerTwo);
                                 recyclerViewLine.setAdapter(lineAdapter);

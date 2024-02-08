@@ -8,12 +8,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
 
 public class LineAdapter extends RecyclerView.Adapter<LineAdapter.ViewHolder>{
 
-    private final List<Integer> lineList;
-    private final List<Integer> lineColour;
+    private final LineList lineList;
+
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -30,9 +29,8 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.ViewHolder>{
         }
     }
 
-    public LineAdapter(List<Integer> lineList, List<Integer> lineColour){
+    public LineAdapter(LineList lineList){
         this.lineList = lineList;
-        this.lineColour = lineColour;
     }
 
     @NonNull
@@ -43,17 +41,18 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.ViewHolder>{
         return new ViewHolder(view);
     }
 
+    //edit me to edit the cards
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Integer listImage = lineList.get(position);
-        Integer listColour = lineColour.get(position);
+        int listImage = lineList.getLineList().get(position).getImage();
+        int listColour = lineList.getLineList().get(position).getColour();
         viewHolder.getImageView().setImageResource(listImage);
         viewHolder.getImageView().setBackgroundColor(listColour);
     }
 
     @Override
     public int getItemCount() {
-        return lineList.size();
+        return lineList.getLineList().size();
     }
 
 }
