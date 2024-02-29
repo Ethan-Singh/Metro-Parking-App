@@ -25,7 +25,9 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Facility item = items.get(position);
-        viewHolder.setText(item);
+        viewHolder.setName(item);
+        viewHolder.setAvailableSpots(item);
+        viewHolder.setSpots(item);
     }
 
 
@@ -43,12 +45,14 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
             this.binding = binding;
         }
 
-        final FacilityItemRowBinding getBinding() {
-            return binding;
+        final void setName(Facility item) {
+            binding.facilityName.setText(item.getFacilityName());
         }
-
-        final void setText(Facility item) {
-            binding.facilityText.setText(FacilityFormatter.facilityFormat(item));
+        final void setAvailableSpots(Facility item) {
+            int availableSpots = Integer.parseInt(item.getSpots()) - Integer.parseInt(item.getOccupancy().getTotal());
+            binding.facilityAvailableSpots.setText(String.valueOf(availableSpots));        }
+        final void setSpots(Facility item) {
+            binding.facilitySpots.setText(item.getSpots());
         }
     }
 

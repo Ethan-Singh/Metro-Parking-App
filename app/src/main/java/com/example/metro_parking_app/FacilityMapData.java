@@ -24,15 +24,6 @@ public class FacilityMapData {
         facilityMap.put("B-Line", Arrays.asList("10", "11", "12", "13", "490", "489"));
     }
 
-    //for debugging
-    public List<String> getAllFacilityIds() {
-        List<String> allFacilityIds = new ArrayList<>();
-        for (List<String> facilityIds : facilityMap.values()) {
-            allFacilityIds.addAll(facilityIds);
-        }
-        return allFacilityIds;
-    }
-
     public String getLineFromId(String val){
         for(Map.Entry<String, List<String>> entry: facilityMap.entrySet()){
             if(entry.getValue().contains(val)){

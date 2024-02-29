@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.metro_parking_app.databinding.FacilityMainBinding;
@@ -26,6 +27,10 @@ public class FacilityDetailsActivity extends AppCompatActivity {
         binding = FacilityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        Toolbar myToolbar = (Toolbar) binding.mainText;
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.mainText.setNavigationOnClickListener(viewChange -> onBackPressed());
 
         Line lineList = null;
 
@@ -54,9 +59,9 @@ public class FacilityDetailsActivity extends AppCompatActivity {
                         if (totalCalls == facilityIdsFromLine.size()) {
                             runOnUiThread(() -> {
                                 try {
-                                    binding.facilityItemsList.setLayoutManager(new LinearLayoutManager(this));
+                                    binding.facilityItemsRecycler.setLayoutManager(new LinearLayoutManager(this));
                                     final FacilityAdapter facilityAdapter = new FacilityAdapter(allFacilityApiData);
-                                    binding.facilityItemsList.setAdapter(facilityAdapter);
+                                    binding.facilityItemsRecycler.setAdapter(facilityAdapter);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }

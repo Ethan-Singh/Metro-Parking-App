@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.metro_parking_app.databinding.ActivityMainBinding;
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        binding.mainText.setText("Station Parking");
+        Toolbar myToolbar = (Toolbar) binding.mainText;
+        setSupportActionBar(myToolbar);
 
         final ArrayList<Line> lineList = LineData.getLineData();
 

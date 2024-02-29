@@ -12,7 +12,17 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/facilityText"
+            android:id="@+id/facilityName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"/>
+        <TextView
+            android:id="@+id/facilityAvailableSpots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"/>
+        <TextView
+            android:id="@+id/facilitySpots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"/>
