@@ -1,9 +1,12 @@
 
-# Metro-Parking-App
- 
- An app developed using Java which requests the current parking status of the Sydney Metro Car Parks using the public CarParkAPI.
- 
- <br>
+# Sydney-Trains-Parking-App (formerly Metro-Parking-App)
+
+An app developed using Java, which requests and displays the current parking status of all Sydney CarParks connected to the publicly available CarParkAPI, see "[OpenData](https://opendata.transport.nsw.gov.au/dataset/car-park-api)" for official documentation.
+<br>
+
+#Issues
+[ ] Resolve 501 response from the server (too many requests) #1
+
  
 # Issues
 - ~~I am currently getting a 501 response from the server (too many requests), however, I've done some testing using https://jsonplaceholder.typicode.com/ and I should only be requesting once on startup. I am in the process of adding a refresh function to confirm.~~
