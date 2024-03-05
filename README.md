@@ -4,8 +4,12 @@
 An app developed using Java, which requests and displays the current parking status of all Sydney CarParks connected to the publicly available CarParkAPI, see "[OpenData](https://opendata.transport.nsw.gov.au/dataset/car-park-api)" for official documentation.
 <br>
 
-#Issues
-[ ] Resolve 501 response from the server (too many requests) #1
+# Tasks
+
+```[tasklist]
+### My tasks
+- [ ] Draft task
+```
 
  
 # Issues
