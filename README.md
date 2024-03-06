@@ -23,7 +23,7 @@ An app developed using Java, that requests and displays the current parking stat
 - [X] Uses Android `View.OnClickListener` within the `RecyclerView` Adapter to allow users to select a Line and see relevant parking (i.e. "M" -> Tallawong Parking, Kellyville Parking etc.)
 - [X] Make the new branch the new "main"
 - [ ] Update the Android `CardView` for the Facility `RecyclerView` to conform to the official [Material Design Card](https://m3.material.io/components/cards/overview) specifications for Android
-- [ ] Use the Android `keystore` to store the API key for the APK instead of having it in an unencrypted text file in the APK
+- [ ] Use the Android `keystore` to store the API key for the APK instead of having it in an unencrypted text file
 
 # Features
 * Because the "Line names", and "Facility id's" are stored in a `HashMap` the lookup for the key/value pair (Line name/Facility id) is always O(1).
