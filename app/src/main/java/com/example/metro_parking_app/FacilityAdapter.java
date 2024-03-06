@@ -1,5 +1,9 @@
 package com.example.metro_parking_app;
 
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -27,7 +31,6 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
         Facility item = items.get(position);
         viewHolder.setName(item);
         viewHolder.setAvailableSpots(item);
-        viewHolder.setSpots(item);
     }
 
 
@@ -48,18 +51,25 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
         final void setName(Facility item) {
             binding.facilityName.setText(item.getFacilityName());
         }
+
         final void setAvailableSpots(Facility item) {
-            int availableSpots = Integer.parseInt(item.getSpots()) - Integer.parseInt(item.getOccupancy().getTotal());
-            binding.facilityAvailableSpots.setText(String.valueOf(availableSpots));        }
-        final void setSpots(Facility item) {
-            binding.facilitySpots.setText(item.getSpots());
+            int spots = Integer.valueOf(item.getSpots());
+            int availableSpots = spots - Integer.parseInt(item.getOccupancy().getTotal());
+            String text = "Availability: " + availableSpots + "/" + spots;
+
+            SpannableString spannableString = new SpannableString(text);
+            int slashIndex = text.indexOf("/");
+            int textColourAvailableSpotsEmpty = Color.GREEN;
+            int textColourAvailableSpotsFull = Color.RED;
+
+            if(availableSpots == 0){
+                spannableString.setSpan(new ForegroundColorSpan(textColourAvailableSpotsFull), 14, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            } else {
+                spannableString.setSpan(new ForegroundColorSpan(textColourAvailableSpotsEmpty), 14, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            binding.facilityAvailableSpots.setText(spannableString);
         }
     }
-
-
-
-
-
-
 
 }

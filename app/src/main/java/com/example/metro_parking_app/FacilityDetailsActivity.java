@@ -27,10 +27,12 @@ public class FacilityDetailsActivity extends AppCompatActivity {
         binding = FacilityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        Toolbar myToolbar = (Toolbar) binding.mainText;
+
+        Toolbar myToolbar = binding.toolbar;
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        binding.mainText.setNavigationOnClickListener(viewChange -> onBackPressed());
+        binding.toolbar.setNavigationOnClickListener(viewChange -> onBackPressed());
+        getSupportActionBar().setTitle("");
 
         Line lineList = null;
 
