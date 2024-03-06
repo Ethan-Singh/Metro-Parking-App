@@ -1,30 +1,32 @@
 
 # Metro-Parking-App
- 
- An app developed using Java which requests the current parking status of the Sydney Metro Car Parks using the public CarParkAPI.
- 
- <br>
- 
-# Issues
-- ~~I am currently getting a 501 response from the server (too many requests), however, I've done some testing using https://jsonplaceholder.typicode.com/ and I should only be requesting once on startup. I am in the process of adding a refresh function to confirm.~~
-> A: If you call the api directly ".../carpark/" without specifying which one, it calls all of them, which translates into >5 requests a second as there are >5 metro car parks.
+(_also known as the Sydney Trains Parking App_)
+<br>
+
+An app developed using Java, that requests and displays the current parking status of all Sydney Car Parks connected to the publicly available CarParkAPI, see the  [**offical**](https://opendata.transport.nsw.gov.au/organization/transport-opendata-hub) website for documentation.
 
 <br>
 
-- ~~I was getting a FileIOException Error (couldn't find the file).~~
-> A: Still not sure why it wasn't working when I specified where it was using the project root. But I solved it by making an assets folder and using the inbuilt getAssets().open([filename]) instead.
+# Milestones
+- [X] Displays output for a single car park in the console (`System.out.println([someOutput])`) 
+- [X] Displays output for a single car park on the device (text field in `activity_main.xml`)
+- [X] Uses Java `BufferedReader` to more securely read API key (from file instead of hardcoded as a variable)
+- [X] Uses Android `RecyclerView` to support a more efficient future `View`s (when more than one car park is be displayed)
+- [X] Uses asynchronous Android `executor` to call the CarParkAPI on a separate thread
+- [X] Uses Android `handler` to delay API calls to <=5 per second (maximum for a developer)
+- [X] Uses `https://github.com/FasterXML/jackson` to load Model classes with relevant `JSON` response during `exectuor.execute...` (see [OpenData](https://opendata.transport.nsw.gov.au/dataset/car-park-api) for official documentation on response data structure)
+- [X] Uses `Map<Integer>, List<String>>` to load the relevant "Station Line" onto new objects, and store facility id's for API calling
+- [X] Displays output for all car parks connected to the API on the device (using `RecylcerView`)
+- [X] Create a separate Git Branch to test sorting by "Station Line" i.e. You select which Line you want to see parking for (M, T1, T2...)
+- [X] Uses Android `ViewBinding` - faster, null safe, type safe, instead of `findViewById()` (see [Android Developers](https://developer.android.com/topic/libraries/view-binding) for official documentation on the benefits of `ViewBinding`)
+- [X] Uses Android `RecyclerView` to display various Lines
+- [X] Uses Android `View.OnClickListener` within the `RecyclerView` Adapter to allow users to select a Line and see relevant parking (i.e. "M" -> Tallawong Parking, Kellyville Parking etc.)
+- [X] Make the new branch the new "main"
+- [ ] Update the Android `CardView` for the Facility `RecyclerView` to conform to the official [Material Design Card](https://m3.material.io/components/cards/overview) specifications for Android
+- [ ] Use the Android `keystore` to store the API key for the APK instead of having it in an unencrypted text file
+- [ ] Make a Logo for the App
 
-<br>
-
-# Things I'd like to get done
-- [X] Make a new class for the ~~ApiRequest~~ (name changed to CarParkAPI) function 
-- [X] Make new classes for the results from CarParkAPI (read the [documentation]([url](https://opendata.transport.nsw.gov.au/dataset/car-park-api)) for the data structure)
-- [X] Make a better GUI <br>
-_(Okay the 'GUI' isn't exactly the best, but I want to move onto this)_
-- [ ] Incorporate OKHttp/Retrofit for dynamic API requests (need to make sure <5 requests are sent a second)
-- [ ] Use notifyDataSetHasChanged() to make the recycler view adapt to the calls (instead of having to wait for all the calls to be done)
-
-# Things that have been done
-...
-* make a test app where you can navigate two activities
+# Features
+* Because the "Line names", and "Facility id's" are stored in a `HashMap` the lookup for the key/value pair (Line name/Facility id) is always O(1).
+* Because the "Line names", and "Facility id's" are stored in a `HashMap` the API requests are only  for carparks that belong to the key (Station Line), decreasing the length of calling significantly `6.6s -> 0.5s calls` in lines like the "T2"(only one car park available)
 
