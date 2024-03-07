@@ -1,9 +1,14 @@
 
+<p align="center">
+  <img src="App-demo.gif" width="199"/>
+</p>
+
+
 # Metro-Parking-App
 (_also known as the Sydney Trains Parking App_)
 <br>
 
-An app developed using Java, that requests and displays the current parking status of all Sydney Car Parks connected to the publicly available CarParkAPI, see the  [**offical**](https://opendata.transport.nsw.gov.au/organization/transport-opendata-hub) website for documentation.
+An app developed using Java, that requests and displays the current parking status of all Sydney Car Parks connected to the publicly available CarParkAPI, see the  [**offical**](https://opendata.transport.nsw.gov.au/organization/transport-opendata-hub) website for documentation
 
 <br>
 
