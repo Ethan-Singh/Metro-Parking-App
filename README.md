@@ -13,6 +13,14 @@ An app developed using Java, that requests and displays the current parking stat
   <img src="/DEMO/App-Parkings2.png" width="199"/>
 </p>
 
+# Features
+* **O(1) lookup** [^1]:
+* **O(n) calls** [^2]
+* Refresh
+
+[^1]: because the "Line names", and "Facility id's" are stored in a `HashMap` the lookup for the key/value pair (Line name/Facility id)
+[^2]: where n is the relevant facilities: because the "Line names", and "Facility id's" are stored in a `HashMap` the API requests are only  for carparks that belong to the key (Station Line), decreasing the length of calling significantly `6.6s -> 0.5s calls` in lines like the "T2"(only one car park available
+
 # Milestones
 - [X] Displays output for a single car park in the console (`System.out.println([someOutput])`) 
 - [X] Displays output for a single car park on the device (text field in `activity_main.xml`)
@@ -31,8 +39,4 @@ An app developed using Java, that requests and displays the current parking stat
 - [ ] Update the Android `CardView` for the Facility `RecyclerView` to conform to the official [Material Design Card](https://m3.material.io/components/cards/overview) specifications for Android
 - [ ] Use the Android `keystore` to store the API key for the APK instead of having it in an unencrypted text file
 - [ ] Make a Logo for the App
-
-# Features
-* Because the "Line names", and "Facility id's" are stored in a `HashMap` the lookup for the key/value pair (Line name/Facility id) is always O(1).
-* Because the "Line names", and "Facility id's" are stored in a `HashMap` the API requests are only  for carparks that belong to the key (Station Line), decreasing the length of calling significantly `6.6s -> 0.5s calls` in lines like the "T2"(only one car park available)
 
