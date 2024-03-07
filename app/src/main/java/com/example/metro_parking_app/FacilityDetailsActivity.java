@@ -41,7 +41,7 @@ public class FacilityDetailsActivity extends AppCompatActivity {
         }
 
         if (lineList != null) {
-
+            getSupportActionBar().setIcon(lineList.getImage());
             FacilityMapData facilityMap = new FacilityMapData();
             List<String> facilityIdsFromLine = facilityMap.getFacilityIdsFromLine(lineList.getId());
             AtomicInteger calls = new AtomicInteger(0);

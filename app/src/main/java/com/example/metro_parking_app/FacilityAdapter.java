@@ -55,17 +55,17 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
         final void setAvailableSpots(Facility item) {
             int spots = Integer.valueOf(item.getSpots());
             int availableSpots = spots - Integer.parseInt(item.getOccupancy().getTotal());
-            String text = "Availability: " + availableSpots + "/" + spots;
+            String text = "Current Parking: " + availableSpots + "/" + spots;
 
             SpannableString spannableString = new SpannableString(text);
             int slashIndex = text.indexOf("/");
             int textColourAvailableSpotsEmpty = Color.GREEN;
             int textColourAvailableSpotsFull = Color.RED;
 
-            if(availableSpots == 0){
-                spannableString.setSpan(new ForegroundColorSpan(textColourAvailableSpotsFull), 14, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if(availableSpots <= 0){
+                spannableString.setSpan(new ForegroundColorSpan(textColourAvailableSpotsFull), 15, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             } else {
-                spannableString.setSpan(new ForegroundColorSpan(textColourAvailableSpotsEmpty), 14, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new ForegroundColorSpan(textColourAvailableSpotsEmpty), 15, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
             binding.facilityAvailableSpots.setText(spannableString);
