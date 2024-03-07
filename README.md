@@ -1,4 +1,4 @@
-<img src="/DEMO/App-Logo.png" width="100"/>
+<img src="/DEMO/App-Logo.svg" width="100"/>
 
 # Metro-Parking-App
 (_also known as the Sydney Trains Parking App_)
