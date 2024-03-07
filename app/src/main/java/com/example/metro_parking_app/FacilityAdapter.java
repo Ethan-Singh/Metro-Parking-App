@@ -1,6 +1,8 @@
 package com.example.metro_parking_app;
 
 import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.metro_parking_app.databinding.FacilityItemRowBinding;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHolder>{
 
@@ -31,6 +34,7 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
         Facility item = items.get(position);
         viewHolder.setName(item);
         viewHolder.setAvailableSpots(item);
+        viewHolder.getTime();
     }
 
 
@@ -69,6 +73,13 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHo
             }
 
             binding.facilityAvailableSpots.setText(spannableString);
+        }
+
+        final void getTime(){
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("@h:mm:ss a", Locale.getDefault());            String currentTime = dateFormat.format(calendar.getTime());
+
+            binding.timeSinceLastRequest.setText(currentTime);
         }
     }
 

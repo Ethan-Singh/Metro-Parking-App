@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.metro_parking_app.databinding.FacilityMainBinding;
 
@@ -20,6 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class FacilityDetailsActivity extends AppCompatActivity {
 
     private FacilityMainBinding binding;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,16 @@ public class FacilityDetailsActivity extends AppCompatActivity {
         if (getIntent().hasExtra(MainActivity.NEXT_SCREEN)) {
             lineList = (Line) getIntent().getSerializableExtra(MainActivity.NEXT_SCREEN);
         }
+        loadFacilities(lineList);
 
+        //since we're using lambda's lineList has to be final
+        final Line finalLineList = lineList;
+        swipeRefreshLayout = binding.swipeRefreshLayout;
+        swipeRefreshLayout.setOnRefreshListener(() -> loadFacilities(finalLineList));
+
+    }
+
+    private void loadFacilities(Line lineList){
         if (lineList != null) {
             getSupportActionBar().setIcon(lineList.getImage());
             FacilityMapData facilityMap = new FacilityMapData();
@@ -64,6 +75,7 @@ public class FacilityDetailsActivity extends AppCompatActivity {
                                     binding.facilityItemsRecycler.setLayoutManager(new LinearLayoutManager(this));
                                     final FacilityAdapter facilityAdapter = new FacilityAdapter(allFacilityApiData);
                                     binding.facilityItemsRecycler.setAdapter(facilityAdapter);
+                                    swipeRefreshLayout.setRefreshing(false);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -75,6 +87,5 @@ public class FacilityDetailsActivity extends AppCompatActivity {
             });
 
         }
-
     }
 }
